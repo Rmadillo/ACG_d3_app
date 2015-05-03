@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>ACG Explorer Demo (BETA 0.9.3)</title>
+    <link rel="stylesheet" type="text/css" href="parallel.css" />
+  </head>
+  <body>
+  
+  <div id="header">
+    <h1>ACG Explorer Demo (BETA 0.9.3)</h1>
+    <button title="Zoom in on selected data" id="keep-data" disabled="disabled">Keep</button>
+    <button title="Remove selected data" id="exclude-data" disabled="disabled">Exclude</button>
+    <button title="Export data as CSV" id="export-data">Export</button>
+    <div class="controls">
+      <strong id="rendered-count"></strong>/<strong id="selected-count"></strong><!--<strong id="data-count"></strong>-->
+      <div class="fillbar"><div id="selected-bar"><div id="rendered-bar">&nbsp;</div></div></div>
+      Lines at <strong id="opacity"></strong> opacity.
+      <span class="settings">
+        <button id="hide-ticks">Hide Ticks</button>
+        <button id="show-ticks" disabled="disabled">Show Ticks</button>
+        <button id="dark-theme">Dark</button>
+        <button id="light-theme" disabled="disabled">Light</button>
+      </span>
+    </div>
+    <div style="clear:both;"></div>
+  </div>  
+  
+  <div id="chart">
+    <canvas id="background"></canvas>
+    <canvas id="foreground"></canvas>
+    <canvas id="highlight"></canvas>
+    <svg></svg>
+  </div>
+  
+  
+  <div id="wrap">
+    <div class="third" id="controls">
+      <div class="bright">
+        <h3>What is this?</h3>
+        <p>
+          A multidimensional explorer of (fake) <a href="ACG_data.csv">ACG data</a>. It works in <a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank">Firefox</a>; it's unlikely to work in Internet Explorer.         </p>
+        <p>
+          The parallel coordinates displays the chosen ACG variables for plan members in the database across 9 dimensions, colored by their primary hospital. 
+        </p>
+        <p>
+          <a href="http://eagereyes.org/techniques/parallel-coordinate" target="_blank">Never heard of parallel coordinates? Read this tutorial.</a>
+        </p>
+        <p>
+          <a href="http://eagereyes.org/techniques/parallel-coordinates#brushing" target="_blank">Brush</a> the visualization to update other charts on this page.
+        </p>
+		<p>
+		Axis definitions are available in the <a href="acglabels.html" target="_blank"><b>data dictionary</b></a>. 
+		</p><br/>
+      </div>
+
+        <div class="bright">
+        <h3>Contact</h3>
+          <p>
+			<a href="mailto:ghofmann@advantageben.comSubject=ACG Explorer App" target="_top">Greg Hofmann</a>, Advantage Benefits Group.
+		</p>
+		<p style="font-size:10px"><br/>
+		<b>Confidentiality Statement</b>: This file contains confidential information protected by federal and state law. <b>The information is intended only for use by authorized users and may not be shared outside of that group.</b> The improper disclosure of such information may be subject to civil or criminal penalties. If this file reached you in error, please contact the sender and destroy this file. Disclosing, copying, forwarding, or distributing the information by unauthorized individuals or entities is strictly prohibited by law. 
+		</p>
+		</div>
+		
+		      <div class="little-box">
+        <h3>Credits &amp; License</h3>
+          <p>
+          Modified and adapted from examples by<br/>
+          <a href="http://bl.ocks.org/1341021">Mike Bostock</a>, <a href="http://bl.ocks.org/1341281">Jason Davies</a>, and <a href="http://bl.ocks.org/3150059">Kai Chang</a>.<br/>
+          </p>
+          <p>
+            Copyright &copy; 2012, Kai Chang.<br/>
+            All rights reserved. <br/>Released under the <a href="http://opensource.org/licenses/bsd-3-clause">BSD License</a>.
+          </p>
+        </p>
+      </div>
+	  
+    </div>
+    <div  class="third">
+      <small>
+        <!--Last rendered <strong id="render-speed"></strong> lines-->
+      </small>
+	  	<p><br/>
+		* <b>FLAG</b> designators: 1 = "Yes'; 0 = "No". <br/>
+		</p>
+
+      <h3>Hospital</h3>
+      <p id="legend">
+      </p>
+	  
+	  <div class="bright">
+	  <br/>
+        <h3>Controls</h3>
+        <p>
+		It can take several seconds to load the entire dataset in the viewer. However, you can still interact with the plot before it finishes loading and it will update appropriately.
+		</p>
+		<p>
+		  <strong>Brush</strong>: Click and drag vertically along an axis.<br/>
+          <strong>Remove Brush</strong>: Tap the axis background.<br/>
+          <strong>Reorder Axes</strong>: Drag a label horizontally.<br/>
+          <strong>Remove Axis</strong>: Drag axis label to the edge of the screen.<br/>
+		  <br/>
+		  <strong>Hide/Show Hospital</strong>: Click on its name (above).<br/>
+          <strong>Show Member Pattern</strong>: Hover over member number (right).<br/>
+		  <strong>Export Selection as Table</strong>: Click the Export button to open a new browser tab with the raw data in csv format. <a href="exportinstructions.html" target="_blank">Click here if you need instructions on how to transfer this into Excel</a>.<br/>
+        </p>
+      </div>
+
+	  
+    </div>
+    <div class="third">
+      <h3>Random Sample of 100 members <br/><input type="text" size="36" id="search" placeholder="Search by member number"></input></h3>
+	  <p>
+	  If your selection has less than 100 members, all will be shown. Otherwise, a random sample of 100 members from the selection will be shown. A table showing all data in your selection is available via the <i>Export</i> button.
+	  </p>
+      <p id="clinic-list">
+      </p>
+    </div>
+  </div>
+  
+  
+  </body>
+  <script src="d3.min.js"></script>
+  <script src="underscore.js"></script>
+  <script src="parallel.js"></script>
+</html>
